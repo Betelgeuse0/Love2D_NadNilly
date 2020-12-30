@@ -1,4 +1,4 @@
-require("ObjExample")
+require("ObjManaging")
 
 function love.load()
 	Obj2(400, 300)
