@@ -4,7 +4,7 @@ function Obj(x, y)
 	return o	--new instance
 end
 
-function ObjUpdate(o, dt)
+function ObjUpdate(o, dt, i)
 	o.x = o.x + 1
 end
 

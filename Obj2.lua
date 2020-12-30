@@ -1,4 +1,4 @@
-function Obj2Update(o, dt)
+function Obj2Update(o, dt, i)
 	o.x = o.x - 1
 end
 

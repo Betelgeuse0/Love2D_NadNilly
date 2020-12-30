@@ -6,7 +6,7 @@ objs = {}
 
 function objs.update(dt)
 	for i,o in ipairs(objs) do 
-		o:update(dt)
+		o:update(dt, i)
 	end
 end
 
@@ -16,3 +16,6 @@ function objs.draw()
 	end
 end
 
+function objs.remove(i)
+	table.remove(objs, i)
+end

@@ -4,7 +4,7 @@ function Björnio(x, y)
 	return o	--new instance
 end
 
-function BjörnioUpdate(o)
+function BjörnioUpdate(o, dt, i)
 	o.y = o.y - 1
 end
 
