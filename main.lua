@@ -2,11 +2,13 @@ require("Code/physicsExtra")
 require("Code/mathExtra")
 require("Code/Björnio")
 require("Code/ObjManaging")
+require("Code/platform")
 
 function love.load()
 	--love.window.setMode(800, 600)
 	world = love.physics.newWorld(0, 9.81*64, true)
 	Björnio(400, 300, 80, 80, "dynamic", 0.5)
+	Platform(500, 300, 200, 5)
 
 
 	local ground = {}
