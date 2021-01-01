@@ -5,15 +5,15 @@ require("Code/Egg")
 require("Code/platform")
 require("Code/Björnio")
 require("Code/ObjManaging")
+require("Code/platform")
 
 
 function love.load()
 	--love.window.setMode(800, 600)
 	--global variables lol
 	world = love.physics.newWorld(0, 9.81*64, true)
-	time = 0
-
-	Björnio(300, 300, 80, 80, "dynamic", 0.5)
+	Björnio(400, 300, 80, 80, "dynamic", 0.5)
+	Platform(500, 300, 200, 5)
 
 	Egg(100, 200, "Sprites/goldegg-SpriteSheet.png")
 
@@ -25,7 +25,6 @@ function love.load()
 end
 
 function love.update(dt)
-	time = time + dt --game time in delta time (seconds)
 	world:update(dt) --this puts the world into motion
 	objs.update(dt)
 end
