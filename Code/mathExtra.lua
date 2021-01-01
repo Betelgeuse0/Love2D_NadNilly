@@ -14,3 +14,12 @@ function sign(x)
 		return 0
 	end
 end
+
+function round(x)
+	local floor = math.floor(x)
+	if ((x - floor) >= 0.5) then 
+		return math.ceil(x)
+	else
+		return floor
+	end
+end

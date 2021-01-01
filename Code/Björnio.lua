@@ -1,6 +1,6 @@
 function Björnio(x, y, w, h, dyn, m)
 	local o = {update = BjörnioUpdate, draw = BjörnioDraw}
-	SetUpPhysics(o, x, y, w, h, dyn, m, true)
+	SetUpPhysics(o, x, y, w, h, dyn, m, true, 1)
 	table.insert(objs, o)
 	return o	--new instance
 end
@@ -17,7 +17,6 @@ function BjörnioUpdate(o, dt, i)
 		elseif love.keyboard.isDown('d') then 
 			o.physics.body:applyForce(velApply, 0)
 		elseif speed > 10 then 
-			print("stopping")
 			o.physics.body:applyForce(-sign(velx) * maxSpeed * 5, 0)
 		end
 		--elseif love.keyboard.isDown('w') then 
