@@ -2,8 +2,10 @@ require("Code/physicsExtra")
 require("Code/mathExtra")
 require("Code/animations")
 require("Code/Egg")
+require("Code/platform")
 require("Code/Björnio")
 require("Code/ObjManaging")
+
 
 function love.load()
 	--love.window.setMode(800, 600)

@@ -4,7 +4,7 @@ function SetUpPhysics(o, x, y, width, height, dynamic, mass, fixedRotation, fric
 	physics.body:setFixedRotation(fixedRotation)
   	physics.shape = love.physics.newRectangleShape(width, height) --make a rectangle with a width of 650 and a height of 50
   	physics.fixture = love.physics.newFixture(physics.body, physics.shape, mass) --attach shape to body
-  	physics.fixture:setFriction(friction)
+  	physics.fixture:setFriction(--[[friction or]] physics.fixture:getFriction())
   	o.physics = physics
 end
 
