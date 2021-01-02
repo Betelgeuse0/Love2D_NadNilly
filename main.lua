@@ -22,7 +22,6 @@ function love.load()
 	Platform(425, -650, 60, 5)
 	Platform(300, -800, 60, 5)
 
-	Egg(275, 100, "Sprites/goldegg-SpriteSheet.png")
 	Egg(100, 200, "Sprites/Eggs/goldegg-SpriteSheet.png", {0, 1, 2})
 	Egg(300, 200, "Sprites/Eggs/dogegg.png")
 
