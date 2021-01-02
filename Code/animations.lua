@@ -48,3 +48,9 @@ function DrawPhysicsAnimation(o, anim, offsetx, offsety)
 	local x, y = GetPolygonCenter(o)
 	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), 1, 1, offsetx, offsety)
 end
+
+function DrawPhysicsAnimationFlippable(o, anim, offsetx, offsety, horizontalDirection)
+	love.graphics.setColor(1, 1, 1, 1)
+	local x, y = GetPolygonCenter(o)
+	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), horizontalDirection, 1, offsetx, offsety)
+end
