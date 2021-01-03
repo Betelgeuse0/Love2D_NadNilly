@@ -6,7 +6,8 @@ function Platform(x, y, w, h)
 end
 
 function PlatformUpdate(o, dt, i)
-	o.physics.body:setY(o.physics.body:getY() + (50 * dt))
+	--StaticFall(o, dt, 50)
+	--todo: add death here
 end
 
 function PlatformDraw(o)

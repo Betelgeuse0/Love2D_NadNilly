@@ -47,3 +47,7 @@ function ObjGetSpeed(o)
 	local velx, vely = o.physics.body:getLinearVelocity()
 	return GetSpeed(velx, vely)
 end
+
+function StaticFall(o, dt, fallSpeed)
+	o.physics.body:setY(o.physics.body:getY() + (fallSpeed * dt))
+end
