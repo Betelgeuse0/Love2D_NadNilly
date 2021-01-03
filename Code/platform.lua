@@ -6,7 +6,7 @@ function Platform(x, y, w, h)
 end
 
 function PlatformUpdate(o, dt, i)
-	o.physics.body:setY(o.physics.body:getY() + (50 * dt))
+	o.physics.body:setY(o.physics.body:getY() + (55 * dt))
 end
 
 function PlatformDraw(o)
