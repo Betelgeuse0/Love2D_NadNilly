@@ -4,9 +4,9 @@
 level = {}
 
 function PlatformTemplate(x, y, w, h, image)
-	if image == nil then
-		image = BLOQUE
-	end
+	image = image or BLOQUE
+	w = w or 64
+	h = h or 32
 	return {x = x, y = y, width = w, height = h}
 end
 
@@ -14,14 +14,21 @@ function level:addSection(platformTemplates)	--add a "section" of the level (an 
 	table.insert(self, platformTemplates)
 end
 
-function level:generate()	--generate a section from index "i"
+function level:generate()
+	local top = 0
 	for i,s in ipairs(self) do 
-	        for i,pt in ipairs(s) do
-	            Platform(pt.x, pt.y, pt.width, pt.height)
-	        end
-	    end
+		local newTop = top
+		for i,pt in ipairs(s) do
+			local yPos = top + pt.y
+			Platform(pt.x, yPos, pt.width, pt.height)
+			if (yPos < newTop) then
+				newTop = yPos 
+			end  
+		end
+		top = newTop
+	end
+	tableClear(self) --clear everything since we don't need it anymore
 end
-
 
 
 
