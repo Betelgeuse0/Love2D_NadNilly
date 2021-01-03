@@ -1,5 +1,5 @@
-function Platform(x, y, w, h)
-	local o = {update = PlatformUpdate, draw = PlatformDraw}
+function Platform(x, y, w, h, image)
+	local o = {update = PlatformUpdate, draw = PlatformDraw, image = image}
 	SetUpPhysics(o, x, y, w, h, "static", 1, true)
 	table.insert(objs, o)
 	return o	--new instance

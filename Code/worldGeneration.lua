@@ -3,7 +3,10 @@
 --			   
 level = {}
 
-function PlatformTemplate(x, y, w, h) 
+function PlatformTemplate(x, y, w, h, image)
+	if image == nil then
+		image = BLOQUE
+	end
 	return {x = x, y = y, width = w, height = h}
 end
 
@@ -12,17 +15,11 @@ function level:addSection(platformTemplates)	--add a "section" of the level (an 
 end
 
 function level:generate()	--generate a section from index "i"
-	--[[local lasty = 1000
 	for i,s in ipairs(self) do 
-		for i,pt in ipairs(s) do
-			local yVal = pt.y + 
-			Platform(pt.x, pt.y, pt.width, pt.height)
-			if (pt.y < lasty) then 
-				lasty = pt.y 
-			end
-		end
-	end
-	clearTable(self) --clear everything since we don't need it anymore]]
+	        for i,pt in ipairs(s) do
+	            Platform(pt.x, pt.y, pt.width, pt.height)
+	        end
+	    end
 end
 
 

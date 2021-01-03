@@ -2,11 +2,11 @@ function Björnio(x, y)
 	local o = {}
 	o.update = BjörnioUpdate
 	o.draw = BjörnioDraw
-	o.animIdle = NewHorizontalAnimation("Sprites/Bjornio/BjornIdle.png", 137, 159, {0, 1})
-	o.animWalk = NewHorizontalAnimation("Sprites/Bjornio/BjornWalk.png", 137, 159, {0, 1, 2, 3, 4, 5})
-	o.animJump = NewHorizontalAnimation("Sprites/Bjornio/BjornJump.png", 137, 159, {0, 1})
-	o.animFalling = NewHorizontalAnimation("Sprites/Bjornio/BjornFalling.png", 137, 159, {0, 1})
-	o.animShooting = NewHorizontalAnimation("Sprites/Bjornio/BjornioShooting.png", 137, 159, {0, 1, 2})
+	o.animIdle = NewHorizontalAnimation(BJORNIDLE, 137, 159, {0, 1})
+	o.animWalk = NewHorizontalAnimation(BJORNWALK, 137, 159, {0, 1, 2, 3, 4, 5})
+	o.animJump = NewHorizontalAnimation(BJORNJUMP, 137, 159, {0, 1})
+	o.animFalling = NewHorizontalAnimation(BJORNFALLING, 137, 159, {0, 1})
+	o.animShooting = NewHorizontalAnimation(BJORNIOSHOOTING, 137, 159, {0, 1, 2})
 	o.animCurrent = o.animIdle
 	o.animSpeed = 0.25
 	o.direction = 1

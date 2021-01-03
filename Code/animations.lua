@@ -1,5 +1,5 @@
-function NewHorizontalAnimation(file, width, height, frameNums) --make a horizontal animation from a sprite sheet image
-	local img = love.graphics.newImage(file)
+function NewHorizontalAnimation(img, width, height, frameNums) --make a horizontal animation from a sprite sheet image
+	local img = img
 	local animQuads = {}
 
 	for i = 1, #frameNums do
@@ -53,4 +53,10 @@ function DrawPhysicsAnimationFlippable(o, anim, offsetx, offsety, horizontalDire
 	love.graphics.setColor(1, 1, 1, 1)
 	local x, y = GetPolygonCenter(o)
 	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), horizontalDirection, 1, offsetx, offsety)
+end
+
+function DrawPlatformAnimation(o, anim, offsetx, offsety)
+	love.graphics.setColor(1, 1, 1, 1)
+	local x, y = GetPolygonCenter(o)
+	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), 1, 1, offsetx, offsety)
 end

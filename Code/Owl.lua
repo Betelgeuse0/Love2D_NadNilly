@@ -1,7 +1,7 @@
 
 function Owl(x, y)
 	local o = {update = OwlUpdate, draw = OwlDraw}
-	o.anim = NewHorizontalAnimation("Sprites/owl-SpriteSheet.png", 71, 57, {0, 1, 2, 3})
+	o.anim = NewHorizontalAnimation(OWLSPRITESHEET, 71, 57, {0, 1, 2, 3})
 	--SetUpPhysics(o, x, y, 41, 51, "static", 1, true, 0)
 	SetUpPhysics(o, x, y, 71, 71, "static", 1, true, 0)
 	table.insert(objs, o)

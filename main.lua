@@ -18,20 +18,20 @@ function love.load()
 	--Platforms in vertical order
 	local section = 
 	{
-	  PlatformTemplate(450, 300, 450, 32),
-    PlatformTemplate(700, 150, 200, 32),
-    PlatformTemplate(950, 0, 400, 32),
-    PlatformTemplate(775, -230, 64, 32),
-    PlatformTemplate(650, -370, 64, 32),
-    PlatformTemplate(525, -520, 64, 32),
-    PlatformTemplate(425, -680, 64, 32),
-    PlatformTemplate(300, -820, 64, 32)
+	  	PlatformTemplate(450, 300, 450, 32),
+	    PlatformTemplate(700, 150, 200, 32),
+	    PlatformTemplate(950, 0, 400, 32),
+	    PlatformTemplate(775, -210, 64, 32),
+	    PlatformTemplate(650, -370, 64, 32),
+	    PlatformTemplate(525, -520, 64, 32),
+	    PlatformTemplate(425, -680, 64, 32),
+	    PlatformTemplate(300, -820, 64, 32)
 	}
 	level:addSection(section)
 	level:generate()
 
-	Egg(100, 200, "Sprites/Eggs/goldegg-SpriteSheet.png", {0, 1, 2})
-	Egg(300, 200, "Sprites/Eggs/dogegg.png")
+	Egg(100, 200, GOLDEGG, {0, 1, 2})
+	Egg(300, 200, DOGEGG)
 	Owl(300, 200)
 
 	local ground = {}

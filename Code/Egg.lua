@@ -1,11 +1,11 @@
-function Egg(x, y, file, frames)
+function Egg(x, y, img, frames)
 	--local o = {update = EggUpdate, draw = EggDraw, image = love.graphics.newImage(imageFileName)}
 	local o
 
 	if frames == nil then 
-		o = {update = EggUpdate, draw = EggDraw, image = love.graphics.newImage(file)}
+		o = {update = EggUpdate, draw = EggDraw, image = img}
 	else
-		o = {update = EggUpdate, draw = EggDraw, anim = NewHorizontalAnimation(file, 43, 53, frames)}
+		o = {update = EggUpdate, draw = EggDraw, anim = NewHorizontalAnimation(img, 43, 53, frames)}
 	end
 
 	local x1, y1 = x + 22, y + 4
