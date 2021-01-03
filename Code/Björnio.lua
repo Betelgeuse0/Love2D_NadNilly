@@ -2,24 +2,24 @@ function Björnio(x, y)
 	local o = {}
 	o.update = BjörnioUpdate
 	o.draw = BjörnioDraw
-	o.animIdle = NewHorizontalAnimation("Sprites/BjornIdle.png", 137, 159, {0, 1})
-	o.animWalk = NewHorizontalAnimation("Sprites/BjornWalk.png", 137, 159, {0, 1, 2, 3, 4, 5})
-	o.animJump = NewHorizontalAnimation("Sprites/BjornJump.png", 137, 159, {0, 1})
-	o.animFalling = NewHorizontalAnimation("Sprites/BjornFalling.png", 137, 159, {0, 1})
-	o.animShooting = NewHorizontalAnimation("Sprites/BjornioShooting.png", 137, 159, {0, 1, 2})
+	o.animIdle = NewHorizontalAnimation("Sprites/Bjornio/BjornIdle.png", 137, 159, {0, 1})
+	o.animWalk = NewHorizontalAnimation("Sprites/Bjornio/BjornWalk.png", 137, 159, {0, 1, 2, 3, 4, 5})
+	o.animJump = NewHorizontalAnimation("Sprites/Bjornio/BjornJump.png", 137, 159, {0, 1})
+	o.animFalling = NewHorizontalAnimation("Sprites/Bjornio/BjornFalling.png", 137, 159, {0, 1})
+	o.animShooting = NewHorizontalAnimation("Sprites/Bjornio/BjornioShooting.png", 137, 159, {0, 1, 2})
 	o.animCurrent = o.animIdle
 	o.animSpeed = 0.25
 	o.direction = 1
 	o.jumping = false
-	SetUpPhysics(o, x, y, 50, 150, "dynamic", 0.5, true)
+	SetUpPhysics(o, x, y, 50, 150, "dynamic", 0.4, true)	--Lower mass parameter = higher jump
 
 	table.insert(objs, o)
 	return o	--new instance
 end
 
 function BjörnioUpdate(o, dt, i)
-	local velApply = 2000
-	local maxSpeed = 200
+	local velApply = 2750
+	local maxSpeed = 250
 	local speed = ObjGetSpeed(o)
 	local velx, vely = o.physics.body:getLinearVelocity()
 
@@ -32,7 +32,7 @@ function BjörnioUpdate(o, dt, i)
 	end
 
 	--Jump
-	if love.keyboard.isDown('w') and math.abs(vely) < 2 then	--and don't jump if you're already jumping
+	if love.keyboard.isDown('w') and math.abs(vely) == 0 then	--and don't jump if you're already jumping
 		o.physics.body:applyLinearImpulse(0, -velApply * 1)
 	elseif vely < -0.5 then		--When jumping up
 		o.jumping = true
@@ -41,7 +41,7 @@ function BjörnioUpdate(o, dt, i)
 	elseif vely > 95 then		--When falling fast enough
 		o.jumping = true
 		o.animCurrent = o.animFalling
-		o.animSpeed = 0.05
+		o.animSpeed = 0.1
 	else						--When no longer falling go back to idle
 		o.jumping = false
 		o.animCurrent = o.animIdle
