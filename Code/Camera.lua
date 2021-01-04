@@ -4,7 +4,6 @@ function Camera:init(windowx, windowy)
 	windowx = windowx or 800
 	windowy = windowy or 600
 	love.window.setMode(windowx, windowy)
-	love.graphics.setDefaultFilter("nearest", "nearest")
 end
 
 function Camera:move(x, y)
@@ -18,6 +17,7 @@ function Camera:set(x, y)
 end
 
 function Camera:draw(scale)
+	love.graphics.setDefaultFilter("nearest", "nearest")
 	scale = scale or 1
 	love.graphics.scale(scale)
 	love.graphics.translate(self.x, self.y)

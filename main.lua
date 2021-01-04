@@ -35,8 +35,10 @@ function love.load()
 	level:generate()
 
 	Egg(100, -200, GOLDEGG, {0, 1, 2})
+	Egg(100, -200, GOLDEGG, {0, 1, 2})
 	Egg(300, -200, DOGEGG)
-	Owl(300, -200)
+	Egg(300, -200, EVILEGG)
+	Owl(300, -200, 400, 400, 500, 1, 0)
 
 	local ground = {}
 	--ground.body = love.physics.newBody(world, 640, 600) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
@@ -53,7 +55,7 @@ end
 function love.update(dt)
 	world:update(dt) --this puts the world into motion
 	objs.update(dt)
-	Camera:move(0, 1)
+	--Camera:move(0, 1)
 end
 
 function love.draw()

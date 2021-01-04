@@ -37,16 +37,16 @@ function DrawPhysics(o, color)
   	love.graphics.polygon("fill", o.physics.body:getWorldPoints(o.physics.shape:getPoints()))
 end
 
-function DrawPhysicsImage(o, image, offsetx, offsety)
+function DrawPhysicsImage(o, image, offsetx, offsety, scalex, scaley)
 	love.graphics.setColor(1, 1, 1, 1)
 	local x, y = GetPolygonCenter(o)
-	love.graphics.draw(image, x, y, o.physics.body:getAngle(), 1, 1, offsetx, offsety)
+	love.graphics.draw(image, x, y, o.physics.body:getAngle(), scalex, scaley, offsetx, offsety)
 end
 
-function DrawPhysicsAnimation(o, anim, offsetx, offsety)
+function DrawPhysicsAnimation(o, anim, offsetx, offsety, scalex, scaley)
 	love.graphics.setColor(1, 1, 1, 1)
 	local x, y = GetPolygonCenter(o)
-	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), 1, 1, offsetx, offsety)
+	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), scalex, scaley, offsetx, offsety)
 end
 
 function DrawPhysicsAnimationFlippable(o, anim, offsetx, offsety, horizontalDirection)
