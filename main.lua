@@ -10,36 +10,38 @@ require("Code/tableExtra")
 require("Code/worldGeneration")
 require("Code/Camera")
 require("Code/global")
+require("Code/callbacks")
 
 function love.load()
   love.graphics.setBackgroundColor(0, .4, .8, 1)	--temporary backgruond color for vibes
 	Camera:init(RAW_WINDOW_WIDTH, RAW_WINDOW_HEIGHT)
 	Camera:set(0, Camera.x + WINDOW_HEIGHT)
 	world = love.physics.newWorld(0, 9.81*150, true)	--OG gravity 9.81 * 64
-	--Platforms in vertical order
+	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+	--NOTE: make sure to put y positions <= 0
 	local section = 
 	{
-		PlatformTemplate(430, -100, 64, 32),
-	    PlatformTemplate(775, -210, 64, 32),
-	    PlatformTemplate(650, -370, 64, 32),
-	    PlatformTemplate(525, -520, 64, 32),
-	    PlatformTemplate(425, -680, 64, 32),
-	    PlatformTemplate(300, -820, 64, 32)
+		PlatformTemplate(430, -100),
+	    PlatformTemplate(775, -210),
+	    PlatformTemplate(650, -370),
+	    PlatformTemplate(525, -520),
+	    PlatformTemplate(425, -680),
+	    PlatformTemplate(300, -820)
 	}
 
 	level:addSection(section)
 	level:addSection(section)
-	level:addSection(section)
+	--level:addSection(section)
 	level:generate()
 
-	Egg(100, 200, GOLDEGG, {0, 1, 2})
-	Egg(300, 200, DOGEGG)
-	Owl(300, 200)
+	Egg(100, -200, GOLDEGG, {0, 1, 2})
+	Egg(300, -200, DOGEGG)
+	Owl(300, -200)
 
 	local ground = {}
 	--ground.body = love.physics.newBody(world, 640, 600) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
   	--ground.shape = love.physics.newRectangleShape(1280, 30) --make a rectangle with a width of 650 and a height of 50
-  	ground.body = love.physics.newBody(world, WINDOW_WIDTH_CENTER, 700) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
+  	ground.body = love.physics.newBody(world, WINDOW_WIDTH_CENTER, 0) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
   	ground.shape = love.physics.newRectangleShape(WINDOW_WIDTH, 30)
   	ground.fixture = love.physics.newFixture(ground.body, ground.shape, 0.5) --attach shape to body
   	objs.ground = ground
@@ -59,5 +61,5 @@ function love.draw()
 	objs.draw()
 
 	love.graphics.setColor(0.28, 0.63, 0.05) -- set the drawing color to green for the ground
-  love.graphics.polygon("fill", objs.ground.body:getWorldPoints(objs.ground.shape:getPoints()))
+  	love.graphics.polygon("fill", objs.ground.body:getWorldPoints(objs.ground.shape:getPoints()))
 end

@@ -1,5 +1,5 @@
 function Björnio(x, y)
-	local o = {}
+	local o = {name = "Bjornio"}
 	o.update = BjörnioUpdate
 	o.draw = BjörnioDraw
 	o.animIdle = NewHorizontalAnimation(BJORNIDLE, 137, 159, {0, 1})
@@ -11,7 +11,7 @@ function Björnio(x, y)
 	o.animSpeed = 0.25
 	o.direction = 1
 	o.jumping = false
-	SetUpPhysics(o, x, y, 50, 150, "dynamic", 0.4, true)	--Lower mass parameter = higher jump
+	SetUpPhysics(o, x, y, 50, 150, "dynamic", 0.4, true, nil, o)	--Lower mass parameter = higher jump
 
 	table.insert(objs, o)
 	return o	--new instance

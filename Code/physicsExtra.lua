@@ -1,19 +1,22 @@
-function SetUpPhysics(o, x, y, width, height, dynamic, mass, fixedRotation, friction)
+function SetUpPhysics(o, x, y, width, height, dynamic, mass, fixedRotation, friction, userData)
 	local physics = {}
 	physics.body = love.physics.newBody(world, x, y, dynamic)
 	physics.body:setFixedRotation(fixedRotation)
   	physics.shape = love.physics.newRectangleShape(width, height) --make a rectangle with a width of 650 and a height of 50
   	physics.fixture = love.physics.newFixture(physics.body, physics.shape, mass) --attach shape to body
-  	physics.fixture:setFriction(--[[friction or]] physics.fixture:getFriction())
+  	physics.fixture:setFriction(friction or physics.fixture:getFriction())
+  	physics.fixture:setUserData(userData)
   	o.physics = physics
 end
 
-function SetUpPhysicsPolygon(o, dynamic, mass, fixedRotation, friction, x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8)
+function SetUpPhysicsPolygon(o, dynamic, mass, fixedRotation, friction, userData, x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8)
 	local physics = {}
 	physics.body = love.physics.newBody(world, x, y, dynamic)
 	physics.body:setFixedRotation(fixedRotation)
 	physics.shape = love.physics.newPolygonShape(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8)
 	physics.fixture = love.physics.newFixture(physics.body, physics.shape, mass) --attach shape to body
+	physics.fixture:setFriction(friction or physics.fixture:getFriction())
+	physics.fixture:setUserData(userData)
 	o.physics = physics
 end
 

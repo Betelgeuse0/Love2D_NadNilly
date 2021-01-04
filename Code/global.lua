@@ -11,6 +11,9 @@ WINDOW_HEIGHT_CENTER = WINDOW_HEIGHT / 2
 PLATFORM_HEIGHT = 32
 PLATFORM_WIDTH = 64
 
+--SCORE
+SCORE = 0
+
 
 --IMAGES
 	--BJORN
@@ -32,6 +35,7 @@ PURPLESTRIPEDEGG  = love.graphics.newImage("Sprites/Eggs/purplestripedegg.png")
 REDSPOTEGG  = love.graphics.newImage("Sprites/Eggs/redspotegg.png")
 SMILEYEGG  = love.graphics.newImage("Sprites/Eggs/smilyegg.png")
 SOURAPPLEEGG  = love.graphics.newImage("Sprites/Eggs/sourappleegg.png")
+SPARKLES = love.graphics.newImage("Sprites/Eggs/sparkles-SpriteSheet.png")
 	--ENVIRONMENT
 BLOQUE =  love.graphics.newImage("Sprites/Environment/bloque.PNG")
 	--UNITS
