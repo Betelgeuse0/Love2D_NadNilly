@@ -3,11 +3,19 @@
 --			   
 level = {}
 
-function PlatformTemplate(x, y, w, h, image)
-	image = image or BLOQUE
-	w = w or 64
-	h = h or 32
-	return {x = x, y = y, width = w, height = h}
+function PlatformTemplate(x, y, image, tileAmount)
+	image = image or STONE
+	tileAmount = tileAmount or 1
+
+	if image == WOOD then
+		frames = WOOD_FRAMES
+	elseif image == DIRT then
+		frames = DIRT_FRAMES
+	else
+		frames = STONE_FRAMES
+	end
+
+	return {x = x, y = y, image = image, tileAmount = tileAmount, frames = frames}
 end
 
 function level:addSection(platformTemplates)	--add a "section" of the level (an array of platform templates)
@@ -20,7 +28,7 @@ function level:generate()
 		local newTop = top
 		for i,pt in ipairs(s) do
 			local yPos = top + pt.y
-			Platform(pt.x, yPos, pt.width, pt.height)
+			Platform(pt.x, yPos, pt.image, pt.tileAmount, pt.frames)
 			if (yPos < newTop) then
 				newTop = yPos 
 			end  

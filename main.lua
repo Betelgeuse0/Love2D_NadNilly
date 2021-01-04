@@ -13,7 +13,7 @@ require("Code/global")
 require("Code/callbacks")
 
 function love.load()
-  love.graphics.setBackgroundColor(0, .4, .8, 1)	--temporary backgruond color for vibes
+  love.graphics.setBackgroundColor(0, .4, .7, 1)	--temporary backgruond color for vibes
 	Camera:init(RAW_WINDOW_WIDTH, RAW_WINDOW_HEIGHT)
 	Camera:set(0, Camera.x + WINDOW_HEIGHT)
 	world = love.physics.newWorld(0, 9.81*150, true)	--OG gravity 9.81 * 64
@@ -21,12 +21,12 @@ function love.load()
 	--NOTE: make sure to put y positions <= 0
 	local section = 
 	{
-		PlatformTemplate(430, -100),
-	    PlatformTemplate(775, -210),
-	    PlatformTemplate(650, -370),
-	    PlatformTemplate(525, -520),
-	    PlatformTemplate(425, -680),
-	    PlatformTemplate(300, -820)
+		PlatformTemplate(430, -110, WOOD, 2),
+	    PlatformTemplate(775, -350, STONE, 2),
+	    PlatformTemplate(650, -550, WOOD, 2),
+	    PlatformTemplate(525, -750, DIRT, 3),
+	    PlatformTemplate(425, -950, STONE, 2),
+	    PlatformTemplate(300, -1000, STONE, 2)
 	}
 
 	level:addSection(section)
@@ -47,7 +47,7 @@ function love.load()
   	objs.ground = ground
 
   	--Spawn Bjornio last so he overlaps!
-  	Björnio(775, -300)
+  	Björnio(775, -500)
 end
 
 function love.update(dt)

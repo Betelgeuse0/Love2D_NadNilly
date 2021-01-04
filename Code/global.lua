@@ -8,8 +8,9 @@ WINDOW_WIDTH_CENTER = WINDOW_WIDTH / 2
 WINDOW_HEIGHT_CENTER = WINDOW_HEIGHT / 2
 
 --PLATFORM
-PLATFORM_HEIGHT = 32
-PLATFORM_WIDTH = 64
+PLATFORM_HEIGHT = 32	--should be 32
+PLATFORM_WIDTH = 64		--should be 64
+ANIM_SPEED = 0.3
 
 --SCORE
 SCORE = 0
@@ -23,6 +24,7 @@ BJORNIO = love.graphics.newImage("Sprites/Bjornio/Bjornio.png")
 BJORNIOSHOOTING = love.graphics.newImage("Sprites/Bjornio/BjornioShooting.png")
 BJORNJUMP = love.graphics.newImage("Sprites/Bjornio/BjornJump.png")
 BJORNWALK = love.graphics.newImage("Sprites/Bjornio/BjornWalk.png")
+	
 	--EGGS
 DARKYELLOWSPOTEGG = love.graphics.newImage("Sprites/Eggs/darkyellowspotegg.png")
 DOGEGG  = love.graphics.newImage("Sprites/Eggs/dogegg.png")
@@ -36,7 +38,17 @@ REDSPOTEGG  = love.graphics.newImage("Sprites/Eggs/redspotegg.png")
 SMILEYEGG  = love.graphics.newImage("Sprites/Eggs/smilyegg.png")
 SOURAPPLEEGG  = love.graphics.newImage("Sprites/Eggs/sourappleegg.png")
 SPARKLES = love.graphics.newImage("Sprites/Eggs/sparkles-SpriteSheet.png")
+	
 	--ENVIRONMENT
-BLOQUE =  love.graphics.newImage("Sprites/Environment/bloque.PNG")
+STONE = love.graphics.newImage("Sprites/Environment/StoneViney.png")
+STONE:setWrap("repeat", "repeat")
+STONE_FRAMES = {0,1,2}
+WOOD = love.graphics.newImage("Sprites/Environment/plainWood.png")
+WOOD:setWrap("repeat", "repeat")
+WOOD_FRAMES = {0}
+DIRT = love.graphics.newImage("Sprites/Environment/dirt.png")
+DIRT:setWrap("repeat", "repeat")
+DIRT_FRAMES = {0}
+	
 	--UNITS
 OWLSPRITESHEET = love.graphics.newImage("Sprites/Units/owl-SpriteSheet.png")
