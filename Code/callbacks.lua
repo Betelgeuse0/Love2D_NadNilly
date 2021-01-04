@@ -24,8 +24,10 @@ function beginContact(a, b, coll)
 		local velx, vely = bjorn.physics.body:getLinearVelocity()
 		local ypos = bjorn.physics.body:getY() + 84/2
 		local oypos = obj.physics.body:getY() - 31/2
+
 		if vely > 0 and ypos < oypos then
 			obj.dead = true
+			bjorn.physics.body:applyLinearImpulse(0, -2750 * 1)
 		end
 	end
 end
