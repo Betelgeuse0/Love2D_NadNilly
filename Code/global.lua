@@ -1,7 +1,7 @@
 --DIMENSIONS
 RAW_WINDOW_WIDTH = 1280
 RAW_WINDOW_HEIGHT = 720
-WINDOW_SCALE = 0.9
+WINDOW_SCALE = 0.909
 WINDOW_WIDTH = RAW_WINDOW_WIDTH / WINDOW_SCALE
 WINDOW_HEIGHT = RAW_WINDOW_HEIGHT / WINDOW_SCALE
 WINDOW_WIDTH_CENTER = WINDOW_WIDTH / 2
@@ -17,6 +17,8 @@ SCORE = 0
 
 
 --IMAGES
+	--MAP
+--MAP_PALETTE = love.graphics.newImage("Sprites/mapPalette.png")
 	--BJORN
 BJORNFALLING = love.graphics.newImage("Sprites/Bjornio/BjornFalling.png")
 BJORNIDLE = love.graphics.newImage("Sprites/Bjornio/BjornIdle.png")
@@ -38,8 +40,23 @@ REDSPOTEGG  = love.graphics.newImage("Sprites/Eggs/redspotegg.png")
 SMILEYEGG  = love.graphics.newImage("Sprites/Eggs/smilyegg.png")
 SOURAPPLEEGG  = love.graphics.newImage("Sprites/Eggs/sourappleegg.png")
 SPARKLES = love.graphics.newImage("Sprites/Eggs/sparkles-SpriteSheet.png")
+--LIST OF EGGS AND THEIR FRAMES FOR ANIM
+EGG_PRESET = {
+	{image = DARKYELLOWSPOTEGG}, 
+	{image = DOGEGG},
+	{image = EVILEGG},
+	{image = GOLDEGG, frames = {0, 1, 2}},
+	{image = HOLYEGG},
+	{image = ICYEGG},
+	{image = PURPLESTRIPEDEGG},
+	{image = REDSPOTEGG},
+	{image = SMILEYEGG},
+	{image = SOURAPPLEEGG},
+	{image = SPARKLES}
+}
 	
 	--ENVIRONMENT
+BACKGROUND = love.graphics.newImage("Sprites/Environment/background.png")
 STONE = love.graphics.newImage("Sprites/Environment/StoneViney.png")
 STONE:setWrap("repeat", "repeat")
 STONE_FRAMES = {0,1,2}
