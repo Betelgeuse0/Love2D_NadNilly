@@ -50,6 +50,7 @@ function level:generate()
 		top = newTop
 	end
 	tableClear(self) --clear everything since we don't need it anymore
+	tableClear(EGG_PRESET)
 end
 
 local mapColors = 
