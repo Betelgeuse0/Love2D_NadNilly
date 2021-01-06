@@ -35,7 +35,8 @@ function love.load()
 end
 
 function love.update(dt)
-	if not setSeed then 
+	if not setSeed then
+		setSeed = false 
 		math.randomseed(dt)
 		level:generate()
 	end
@@ -46,10 +47,14 @@ end
 
 function love.draw()
 	--background
-	love.graphics.setColor(1, 1, 1, 1) -- set the drawing color to green for the ground
-	--love.graphics.draw(BACKGROUND, 0, -400)
-	love.graphics.draw(BACKGROUND, 0, -400 + Camera.y / 50)
+	love.graphics.setColor(BGCOLOR, BGCOLOR, BGCOLOR, 1) -- set the drawing color to green for the ground
+	love.graphics.draw(BACKGROUND, 0, -400)
 	Camera:draw(WINDOW_SCALE)
 	objs.draw()
-	--GUI.drawText(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, "BJORNIO IS SEXY", 100, {0, 0, 0, 1}, 400)
+
+	if LOSE then
+		love.graphics.setColor({.7,.1,.1,1})
+    	love.graphics.setNewFont(290 - (BGCOLOR * 100))
+		love.graphics.print("YOU LOSE", 10 + (BGCOLOR * 300), -Camera.y + 100 , 0.15, 1, 1)
+	end
 end

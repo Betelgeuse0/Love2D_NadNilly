@@ -27,13 +27,16 @@ function beginContact(a, b, coll)
 		local oypos = obj.physics.body:getY() - 31/2
 
 		if vely > 0 and ypos < oypos then
+			JUMP:play()
 			obj.dead = true
 			bjorn.physics.body:setLinearVelocity(velx, 0)
 			bjorn.physics.body:applyLinearImpulse(0, -2750)
-			JUMP:play()
-		else
-			bjorn.health = bjorn.health - 1
-			print(bjorn.health)
+		else	
+			if bjorn.canBeHit then
+				OOO:play()
+				bjorn.health = bjorn.health - 1
+				bjorn.canBeHit = false
+			end
 		end
 	end
 end

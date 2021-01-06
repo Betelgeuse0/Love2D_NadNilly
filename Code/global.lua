@@ -15,6 +15,8 @@ ANIM_SPEED = 0.3
 --PLAYER (BJORNIO) MECHANICS
 SCORE = 0
 ACTIVEBULLETS = {}
+LOSE = false
+BGCOLOR = 1
 
 --IMAGES
 	--MAP
@@ -28,11 +30,6 @@ BJORNJUMP = love.graphics.newImage("Sprites/Bjornio/BjornJump.png")
 BJORNWALK = love.graphics.newImage("Sprites/Bjornio/BjornWalk.png")
 BULLET = love.graphics.newImage("Sprites/Bjornio/bullet.png")
 
---AUDIO
-SHOT = love.audio.newSource('Audio/shot.mp3', 'static')
-SHOT:setVolume(0.5)
-JUMP = love.audio.newSource('Audio/jump.wav', 'static')
---SHOT:setPitch(2.5)	--optional
 	
 	--EGGS
 DARKYELLOWSPOTEGG = love.graphics.newImage("Sprites/Eggs/darkyellowspotegg.png")
@@ -78,3 +75,12 @@ GRASS_FRAMES = {0}
 	
 	--UNITS
 OWLSPRITESHEET = love.graphics.newImage("Sprites/Units/owl-SpriteSheet.png")
+
+--Audio
+JUMP = love.audio.newSource('Audio/jump.wav', 'static')
+SHOT = love.audio.newSource('Audio/shot.mp3', 'static')
+SHOT:setVolume(0.3)
+OOO = love.audio.newSource('Audio/ooo.mp3', 'static')
+OOO:setVolume(0.7)
+OOO:setPitch(2)
+LOSESOUND = love.audio.newSource('Audio/lose2.wav', 'static')
