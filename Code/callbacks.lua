@@ -33,6 +33,8 @@ function beginContact(a, b, coll)
 			--TODO put a sound right here!!!!!!!
 			bjorn.health = bjorn.health - 1
 			print(bjorn.health)
+			bjorn.physics.body:setLinearVelocity(velx, 0)
+			bjorn.physics.body:applyLinearImpulse(0, -2750)
 		end
 	end
 end

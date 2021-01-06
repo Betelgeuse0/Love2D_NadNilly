@@ -31,12 +31,12 @@ function EggUpdate(o, dt, i)
 			o.deathTimer = 1.8
 			o.x, o.y = GetPolygonCenter(o)
 			o.r = o.physics.body:getAngle()
-			o.physics.fixture:destroy()
+			--o.physics.fixture:destroy()
+			o.physics.body:destroy()
 			o.physics = nil
 		end
 
 		o.deathTimer = o.deathTimer - dt 
-
 		if o.deathTimer <= 0 then 
 			objs.remove(i)
 		end
