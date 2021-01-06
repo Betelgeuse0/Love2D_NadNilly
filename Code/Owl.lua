@@ -32,7 +32,7 @@ function OwlUpdate(o, dt, i)
 		UpdateAnimation(dt, o.anim, 0.2)
 
 		local x, y = o.physics.body:getX(), o.physics.body:getY()
-		print(o.centerx, o.physics.body:getX())
+		--print(o.centerx, o.physics.body:getX())
 
 		if o.dirx > 0 then
 			if x < (o.centerx + (o.movex / 2)) then 

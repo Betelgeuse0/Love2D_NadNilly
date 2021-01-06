@@ -1,4 +1,5 @@
 function beginContact(a, b, coll)
+	bulletContact(a,b)
  	local userData1 = a:getUserData()
  	local userData2 = b:getUserData()
 
@@ -28,7 +29,36 @@ function beginContact(a, b, coll)
 		if vely > 0 and ypos < oypos then
 			obj.dead = true
 			bjorn.physics.body:applyLinearImpulse(0, -2750 * 1)
+		else
+			--TODO put a sound right here!!!!!!!
+			bjorn.health = bjorn.health - 1
+			print(bjorn.health)
 		end
+	end
+end
+
+function bulletContact(a, b)
+ 	local userData1 = a:getUserData()
+ 	local userData2 = b:getUserData()
+
+
+ 	if userData1 == nil or userData2 == nil or (userData1.name ~= "bullet" and userData2.name ~= "bullet") then 
+ 		return 
+ 	end
+
+ 	local bullet, obj
+
+ 	if userData1.name == "bullet" then 
+ 		bullet = userData1
+ 		obj = userData2
+ 	else 
+ 		bullet = userData2
+ 		obj = userData1
+ 	end
+
+	if obj.name == "owl" then
+		obj.dead = true
+		bullet.hasHit = true
 	end
 end
  

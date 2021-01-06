@@ -11,6 +11,8 @@ function PlatformTemplate(x, y, image, tileAmount)
 		frames = WOOD_FRAMES
 	elseif image == DIRT then
 		frames = DIRT_FRAMES
+	elseif image == GRASS then
+		frames = GRASS_FRAMES
 	else
 		frames = STONE_FRAMES
 	end

@@ -11,6 +11,8 @@ function Björnio(x, y)
 	o.animSpeed = 0.25
 	o.direction = 1
 	o.jumping = false
+	o.timer = 0
+	o.health = 10
 	SetUpPhysics(o, x, y, 50, 150, "dynamic", 0.4, true, nil, o)	--Lower mass parameter = higher jump
 
 	table.insert(objs, o)
@@ -25,6 +27,7 @@ function BjörnioUpdate(o, dt, i)
 
 	--Animation
 	UpdateAnimation(dt, o.animCurrent, o.animSpeed)
+	projectileUpdater(dt)
 
 	--Enforce speed cap
 	if (math.abs(velx) > maxSpeed) then
@@ -70,9 +73,39 @@ function BjörnioUpdate(o, dt, i)
 		o.animSpeed = 0.25
 	end 
 
+
+	--shoot
+	o.timer = o.timer + dt
+	if love.keyboard.isDown('space') and o.timer > 0.5 then   --shoot
+		o.physics.body:applyLinearImpulse(-o.direction * 800, -800)
+		SHOT:play()
+		o.timer = 0
+		shootBullet(o.physics.body:getX(), o.physics.body:getY(), o.direction)
+	end
+
+	--Enforce health
+	if o.health <= 0 then
+		print("deth")
+	end
 end
 
 function BjörnioDraw(o)
-	--DrawPhysics(o, {0, 0, 1, 1})
-	DrawPhysicsAnimationFlippable(o, o.animCurrent, 63, 84, o.direction)
+	--Draw Bjornio
+    --DrawPhysics(o, {0, 0, 1, 1})	--Uncomment to see collision zone
+	DrawPhysicsAnimationFlippable(o, o.animCurrent, 63, 83, o.direction)
+
+	--Draw bullets
+	for i,bullets in ipairs(ACTIVEBULLETS) do
+        love.graphics.draw(bullets.image, bullets.x, bullets.y, 0, -bullets.direction, 1, 0, 15)
+    	--DrawPhysics(bullets, {0,0,1,1})	--uncomment to see collision zone
+    end
+
+    --Draw health bar
+    --drawHealth(o)
+    i = 1
+    while i < o.health do
+    	love.graphics.draw(EGG, WINDOW_WIDTH - (30 * i), -WINDOW_HEIGHT + 10, 0, .6, .6, 0, 0)
+    	i = i + 1
+    end
 end
+

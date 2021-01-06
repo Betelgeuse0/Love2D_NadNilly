@@ -1,3 +1,4 @@
+require("Code/slam")
 require("Code/physicsExtra")
 require("Code/mathExtra")
 require("Code/animations")
@@ -11,6 +12,7 @@ require("Code/worldGeneration")
 require("Code/Camera")
 require("Code/global")
 require("Code/callbacks")
+require("Code/projectile")
 
 function love.load()
   love.graphics.setBackgroundColor(0, .4, .7, 1)	--temporary backgruond color for vibes
@@ -21,10 +23,10 @@ function love.load()
 	--NOTE: make sure to put y positions <= 0
 	local section = 
 	{
-		PlatformTemplate(430, -110, WOOD, 2),
+		PlatformTemplate(430, -110, GRASS, 2),
 	    PlatformTemplate(775, -350, STONE, 2),
 	    PlatformTemplate(650, -550, WOOD, 2),
-	    PlatformTemplate(525, -750, DIRT, 3),
+	    PlatformTemplate(525, -750, DIRT, 1),
 	    PlatformTemplate(425, -950, STONE, 2),
 	    PlatformTemplate(300, -1000, STONE, 2)
 	}
