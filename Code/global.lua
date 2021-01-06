@@ -27,8 +27,11 @@ BJORNIOSHOOTING = love.graphics.newImage("Sprites/Bjornio/BjornioShooting.png")
 BJORNJUMP = love.graphics.newImage("Sprites/Bjornio/BjornJump.png")
 BJORNWALK = love.graphics.newImage("Sprites/Bjornio/BjornWalk.png")
 BULLET = love.graphics.newImage("Sprites/Bjornio/bullet.png")
-SHOT = love.audio.newSource('Sprites/Bjornio/shot.mp3', 'static')
+
+--AUDIO
+SHOT = love.audio.newSource('Audio/shot.mp3', 'static')
 SHOT:setVolume(0.5)
+JUMP = love.audio.newSource('Audio/jump.wav', 'static')
 --SHOT:setPitch(2.5)	--optional
 	
 	--EGGS
@@ -56,7 +59,6 @@ EGG_PRESET = {
 	{image = REDSPOTEGG},
 	{image = SMILEYEGG},
 	{image = SOURAPPLEEGG},
-	{image = SPARKLES}
 }
 	
 	--ENVIRONMENT

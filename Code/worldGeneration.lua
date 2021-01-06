@@ -33,6 +33,17 @@ function level:addSection(platformTemplates)	--add a "section" of the level (an 
 end
 
 function level:generate()
+
+	local rlevel = {}
+	for i = 0, #self do 
+		local ri = math.random(#self)
+		local section = self[ri]
+		table.insert(rlevel, section)
+		table.remove(self, ri)
+	end
+	self = rlevel
+
+
 	local top = 0
 	for i,s in ipairs(self) do 
 		local newTop = top
@@ -97,7 +108,7 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 				prevColor = {r = pr, g = pg, b = pb, a = pa}
 			end
 
-			if not colorEquals(color, mapColors.background) and (prevColor == nil or not colorEquals(color, prevColor)) then 
+			if not colorEquals(color, mapColors.background) and (not colorIsPlatform(color) or (prevColor == nil or not colorEquals(color, prevColor))) then 
 				local posx, posy = x * 32, (image:getHeight() - y) * 32 * -1
 				local w, h = 0, 0
 				if (colorIsPlatform(color)) then 
@@ -112,7 +123,6 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 				elseif colorEquals(color, mapColors.dirtPlatform) then 
 					table.insert(section, PlatformTemplate(posx, posy, DIRT, w/2, DIRT_FRAMES))
 				elseif colorEquals(color, mapColors.grassPlatform) then 
-					local w, h = self:scanPlatformTileDimensions(imageData, x, y)
 					table.insert(section, PlatformTemplate(posx, posy, GRASS, w/2, GRASS_FRAMES))
 				elseif colorEquals(color, mapColors.owl) then 
 					table.insert(section, OwlTemplate(posx, posy, 0, 0, 0, 0, 0))
@@ -125,7 +135,7 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 				elseif colorEquals(color, mapColors.owlDiag2) then 
 					table.insert(section, OwlTemplate(posx, posy, 400, 400, 500, 1, -1))
 				elseif colorEquals(color, mapColors.egg) then 
-					table.insert(section, EggTemplate(posx, posy))
+					table.insert(section, EggTemplate(posx - 175, posy + 160))
 				end
 			end
 		end

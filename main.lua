@@ -13,16 +13,20 @@ require("Code/Camera")
 require("Code/global")
 require("Code/callbacks")
 require("Code/projectile")
+require("Code/GUI")
 
 function love.load()
-  	--love.graphics.setBackgroundColor(0, .4, .7, 1)	--temporary backgruond color for vibes
+  	love.graphics.setBackgroundColor(0, .4, .7, 1)	--temporary backgruond color for vibes
 	Camera:init(RAW_WINDOW_WIDTH, RAW_WINDOW_HEIGHT)
-	Camera:set(0, Camera.x + WINDOW_HEIGHT)
+	Camera:set(0, Camera.y + WINDOW_HEIGHT)
 	world = love.physics.newWorld(0, 9.81*150, true)	--OG gravity 9.81 * 64
 	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+	level:addSectionFromImage("Sprites/LevelDesign/section3.png")
+	level:addSectionFromImage("Sprites/LevelDesign/testSection2.png")
 	level:addSectionFromImage("Sprites/LevelDesign/testSection.png")
-	level:addSectionFromImage("Sprites/LevelDesign/testSection.png")
-	level:generate()
+
+	setSeed = false
+	
 
 	Platform(640, -14, DIRT, 25, DIRT_FRAMES)	--ground base
 
@@ -31,6 +35,10 @@ function love.load()
 end
 
 function love.update(dt)
+	if not setSeed then 
+		math.randomseed(dt)
+		level:generate()
+	end
 	world:update(dt) --this puts the world into motion
 	objs.update(dt)
 	Camera:move(0, 1)
@@ -39,7 +47,9 @@ end
 function love.draw()
 	--background
 	love.graphics.setColor(1, 1, 1, 1) -- set the drawing color to green for the ground
-	love.graphics.draw(BACKGROUND, 0, -400)
+	--love.graphics.draw(BACKGROUND, 0, -400)
+	love.graphics.draw(BACKGROUND, 0, -400 + Camera.y / 50)
 	Camera:draw(WINDOW_SCALE)
 	objs.draw()
+	--GUI.drawText(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, "BJORNIO IS SEXY", 100, {0, 0, 0, 1}, 400)
 end

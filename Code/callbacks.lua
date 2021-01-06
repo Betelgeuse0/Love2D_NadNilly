@@ -28,13 +28,12 @@ function beginContact(a, b, coll)
 
 		if vely > 0 and ypos < oypos then
 			obj.dead = true
-			bjorn.physics.body:applyLinearImpulse(0, -2750 * 1)
-		else
-			--TODO put a sound right here!!!!!!!
-			bjorn.health = bjorn.health - 1
-			print(bjorn.health)
 			bjorn.physics.body:setLinearVelocity(velx, 0)
 			bjorn.physics.body:applyLinearImpulse(0, -2750)
+			JUMP:play()
+		else
+			bjorn.health = bjorn.health - 1
+			print(bjorn.health)
 		end
 	end
 end

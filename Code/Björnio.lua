@@ -37,6 +37,7 @@ function BjörnioUpdate(o, dt, i)
 	--Jump
 	if love.keyboard.isDown('w') and math.abs(vely) == 0 then	--and don't jump if you're already jumping
 		o.physics.body:applyLinearImpulse(0, -velApply * 1)
+		JUMP:play()
 	elseif vely < -0.5 then		--When jumping up
 		o.jumping = true
 		o.animCurrent = o.animJump
@@ -85,7 +86,7 @@ function BjörnioUpdate(o, dt, i)
 
 	--Enforce health
 	if o.health <= 0 then
-		print("deth")
+		--print("deth")
 	end
 end
 
