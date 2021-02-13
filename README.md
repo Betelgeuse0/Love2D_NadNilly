@@ -5,4 +5,5 @@ Simply download the executable to play.
 Controls:
 
 W, A, D - left & right movement and jump.
+
 Spacebar - shoot with rifle.
