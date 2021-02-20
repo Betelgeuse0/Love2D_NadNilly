@@ -1,5 +1,6 @@
 function Platform(x, y, image, tileAmount, frames)
 	local o = {}
+	o.name = "platform"
 	o.update = PlatformUpdate 
 	o.draw = PlatformDraw 
 	o.image = image

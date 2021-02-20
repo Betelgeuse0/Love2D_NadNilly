@@ -1,7 +1,7 @@
 --please note: make all sections above 0,0 except the first section
 --			   make all section have the same dimensions it's easy to calculate when we need a new section
 --			   
-level = {}
+level = {info = {}}
 
 function PlatformTemplate(x, y, image, tileAmount)
 	image = image or STONE
@@ -17,53 +17,69 @@ function PlatformTemplate(x, y, image, tileAmount)
 		frames = STONE_FRAMES
 	end
 
-	return {x = x, y = y, image = image, tileAmount = tileAmount, frames = frames, name = "platform"}
+	return {basey = y, x = x, y = y, image = image, tileAmount = tileAmount, frames = frames, name = "platform"}
 end
 
 function OwlTemplate(x, y, movex, movey, speed, dirx, diry)
-	return {x = x, y = y, movex = movex, movey = movey, speed = speed, dirx = dirx, diry = diry, name = "owl"}
+	return {basey = y, x = x, y = y, movex = movex, movey = movey, speed = speed, dirx = dirx, diry = diry, name = "owl"}
 end
 
 function EggTemplate(x, y)
-	return {x = x, y = y, preset = EGG_PRESET[math.random(#EGG_PRESET)], name = "egg"}
+	return {basey = y, x = x, y = y, preset = EGG_PRESET[math.random(#EGG_PRESET)], name = "egg"}
+end
+
+function level:update()
+	for j,t in ipairs(self.info) do
+		--check if template is below the camera and if it is then place it relative to top
+		if (t.y - 80) > (-Camera.y + WINDOW_HEIGHT) then 
+
+			if (t.y == self.top) then
+				self:setRelativeToTop(t)
+				self.top = t.y
+			else
+				self:setRelativeToTop(t)
+			end
+			
+			self:genObj(t)
+
+		end
+	end
 end
 
 function level:addSection(platformTemplates)	--add a "section" of the level (an array of platform templates)
-	table.insert(self, platformTemplates)
+	--table.insert(self.sections, platformTemplates)
+	tableInsertContents(self.info, platformTemplates)
+end
+
+function level:setRelativeToTop(t)
+	t.y = self.top + t.basey
+end
+
+function level:genObj(t)
+	if t.name == "platform" then 
+		Platform(t.x, t.y, t.image, t.tileAmount, t.frames)
+	elseif t.name == "owl" then 
+		Owl(t.x, t.y, t.movex, t.movey, t.speed, t.dirx, t.diry)
+	elseif t.name == "egg" then 
+		Egg((t.x / 2) + 16, t.y / 2, t.preset.image, t.preset.frames)
+	end
+
 end
 
 function level:generate()
-
-	local rlevel = {}
-	for i = 0, #self do 
-		local ri = math.random(#self)
-		local section = self[ri]
-		table.insert(rlevel, section)
-		table.remove(self, ri)
-	end
-	self = rlevel
-
-
-	local top = 0
-	for i,s in ipairs(self) do 
-		local newTop = top
-		for i,t in ipairs(s) do
-			local yPos = top + (t.y or t.physics.body:getY())
-			if t.name == "platform" then 
-				Platform(t.x, yPos, t.image, t.tileAmount, t.frames)
-				if (yPos < newTop) then
-					newTop = yPos 
-				end  
-			elseif t.name == "owl" then 
-				Owl(t.x, yPos, t.movex, t.movey, t.speed, t.dirx, t.diry)
-			elseif t.name == "egg" then 
-				Egg(t.x, yPos, t.preset.image, t.preset.frames)
+	--generate objects from templates
+	self.top = 0
+	local newTop = self.top
+	for i,t in ipairs(self.info) do
+		self:setRelativeToTop(t)
+		if (t.name == "platform") then 
+			if (t.y < newTop) then 
+				newTop = t.y
 			end
 		end
-		top = newTop
+		self:genObj(t)
 	end
-	tableClear(self) --clear everything since we don't need it anymore
-	tableClear(EGG_PRESET)
+	self.top = newTop
 end
 
 local mapColors = 
@@ -96,7 +112,17 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 	local section = {}
 	local imageData = love.image.newImageData(filename)
 
-	local x = 0
+	--find the base top
+	local baseTop = 0
+
+	if (#self.info > 0) then 
+		tableForEach(self.info, 
+			function (v)
+				if (v.name == "platform" and v.y < baseTop) then 
+					baseTop = v.y 
+				end
+			end)
+	end
 
 	for x = 0, image:getWidth() - 1 do
 		for y = 0, image:getHeight() - 1 do 
@@ -109,7 +135,8 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 			end
 
 			if not colorEquals(color, mapColors.background) and (not colorIsPlatform(color) or (prevColor == nil or not colorEquals(color, prevColor))) then 
-				local posx, posy = x * 32, (image:getHeight() - y) * 32 * -1
+				local posx, posy = x * 32, (image:getHeight() - y) * 32 * -1 + baseTop
+
 				local w, h = 0, 0
 				if (colorIsPlatform(color)) then 
 					w, h = self:scanPlatformTileDimensions(image, imageData, x, y)
@@ -135,13 +162,12 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 				elseif colorEquals(color, mapColors.owlDiag2) then 
 					table.insert(section, OwlTemplate(posx, posy, 400, 400, 500, 1, -1))
 				elseif colorEquals(color, mapColors.egg) then 
-					table.insert(section, EggTemplate(posx - 175, posy + 160))
+					table.insert(section, EggTemplate(posx, posy))
 				end
 			end
 		end
 	end
-
-	table.insert(self, section)
+	tableInsertContents(self.info, section)
 end
 
 function level:scanPlatformTileDimensions(image, imageData, x, y)

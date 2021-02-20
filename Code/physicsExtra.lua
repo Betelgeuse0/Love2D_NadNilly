@@ -21,6 +21,8 @@ function SetUpPhysicsPolygon(o, dynamic, mass, fixedRotation, friction, userData
 end
 
 function GetPolygonCenter(o)
+	if o.physics == nil then return end
+	
 	x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8 = o.physics.body:getWorldPoints(o.physics.shape:getPoints())
 	local points = {x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8}
 	local averagex = 0

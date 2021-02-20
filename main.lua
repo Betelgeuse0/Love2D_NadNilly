@@ -20,16 +20,19 @@ function love.load()
   	love.graphics.setBackgroundColor(0, .4, .7, 1)	--temporary backgruond color for vibes
 	Camera:init(RAW_WINDOW_WIDTH, RAW_WINDOW_HEIGHT)
 	Camera:set(0, Camera.y + WINDOW_HEIGHT)
+	Camera.speed, Camera.maxSpeed = 1, 5
+
 	world = love.physics.newWorld(0, 9.81*150, true)	--OG gravity 9.81 * 64
 	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+	
 	level:addSectionFromImage("Sprites/LevelDesign/section3.png")
 	level:addSectionFromImage("Sprites/LevelDesign/testSection2.png")
 	level:addSectionFromImage("Sprites/LevelDesign/testSection.png")
 
 	setSeed = false
-	
 
-	Platform(640, -14, DIRT, 25, DIRT_FRAMES)	--ground base
+	local groundBase = Platform(640, -14, DIRT, 25, DIRT_FRAMES)
+	groundBase.name = "groundBase";
 
   	--Spawn Bjornio last so he overlaps!
   	Björnio(775, -500)
@@ -37,13 +40,20 @@ end
 
 function love.update(dt)
 	if not setSeed then
-		setSeed = false 
+		setSeed = true
 		math.randomseed(dt)
 		level:generate()
 	end
 	world:update(dt) --this puts the world into motion
+	level:update()
 	objs.update(dt)
-	Camera:move(0, 1)
+
+	Camera:move(0, Camera.speed)
+
+	--gradually increase the camera speed
+	if (Camera.speed < Camera.maxSpeed) then 
+		Camera.speed = Camera.speed + (dt / 25)
+	end
 end
 
 function love.draw()

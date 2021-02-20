@@ -16,6 +16,10 @@ function Camera:set(x, y)
 	self.y = y
 end
 
+function Camera:get()
+	return -self.x, -self.y;
+end
+
 function Camera:draw(scale)
 	love.graphics.setDefaultFilter("nearest", "nearest")
 	scale = scale or 1
