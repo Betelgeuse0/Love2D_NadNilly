@@ -107,6 +107,12 @@ function colorIsPlatform(c)
 		or colorEquals(c, mapColors.dirtPlatform) or colorEquals(c, mapColors.grassPlatform)
 end
 
+function level:addSectionsFromImage(sectionNames)
+	for i,v in ipairs(sectionNames) do 
+		self:addSectionFromImage(v)
+	end
+end
+
 function level:addSectionFromImage(filename) --note make images from a 44x25 file
 	local image = love.graphics.newImage(filename)
 	local section = {}

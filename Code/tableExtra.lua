@@ -25,3 +25,15 @@ function tableInsertContents(t, t2)
 		table.insert(t, v)
 	end
 end
+
+function tableRandomized(t)
+	local randomized = {}
+
+	for i = 1, #t do
+		local index = math.random(1, #t)
+		table.insert(randomized, t[index])
+		table.remove(t, index)
+	end
+
+	return randomized 
+end

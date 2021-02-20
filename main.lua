@@ -25,9 +25,9 @@ function love.load()
 	world = love.physics.newWorld(0, 9.81*150, true)	--OG gravity 9.81 * 64
 	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	
-	level:addSectionFromImage("Sprites/LevelDesign/section3.png")
-	level:addSectionFromImage("Sprites/LevelDesign/testSection2.png")
-	level:addSectionFromImage("Sprites/LevelDesign/testSection.png")
+	--level:addSectionFromImage("Sprites/LevelDesign/section3.png")
+	--level:addSectionFromImage("Sprites/LevelDesign/testSection2.png")
+	--level:addSectionFromImage("Sprites/LevelDesign/testSection.png")
 
 	setSeed = false
 
@@ -42,6 +42,16 @@ function love.update(dt)
 	if not setSeed then
 		setSeed = true
 		math.randomseed(dt)
+
+		local sectionImageNames = 
+		{
+			"Sprites/LevelDesign/section3.png",
+			"Sprites/LevelDesign/testSection2.png",
+			"Sprites/LevelDesign/testSection.png"
+		}
+
+		sectionImageNames = tableRandomized(sectionImageNames)
+		level:addSectionsFromImage(sectionImageNames)
 		level:generate()
 	end
 	world:update(dt) --this puts the world into motion
@@ -58,11 +68,19 @@ end
 
 function love.draw()
 	--background
-	love.graphics.setColor(BGCOLOR, BGCOLOR, BGCOLOR, 1) -- set the drawing color to green for the ground
+	love.graphics.setColor(BGCOLOR, BGCOLOR, BGCOLOR, 1)
 	love.graphics.draw(BACKGROUND, 0, -400)
+
+	--camera and objects drawing
 	Camera:draw(WINDOW_SCALE)
 	objs.draw()
 
+	--score 
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.setNewFont(35)
+	love.graphics.print("SCORE:" .. SCORE, 10, -Camera.y + 10, 0, 1, 1)
+ 
+	--game over lose message
 	if LOSE then
 		love.graphics.setColor({.7,.1,.1,1})
     	love.graphics.setNewFont(290 - (BGCOLOR * 100))

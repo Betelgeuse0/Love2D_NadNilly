@@ -73,7 +73,7 @@ GRASS = love.graphics.newImage("Sprites/Environment/grass.png")
 GRASS:setWrap("repeat", "repeat")
 GRASS_FRAMES = {0}
 	
-	--UNITS
+--UNITS
 OWLSPRITESHEET = love.graphics.newImage("Sprites/Units/owl-SpriteSheet.png")
 
 --Audio
