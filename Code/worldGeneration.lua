@@ -60,7 +60,6 @@ function level:setRelativeToTop(t)
 end
 
 function level:genObj(t)
-	print(t.name)
 	if t.name == "platform" then 
 		Platform(t.x, t.y, t.image, t.tileAmount, t.frames)
 	elseif t.name == "owl" then 

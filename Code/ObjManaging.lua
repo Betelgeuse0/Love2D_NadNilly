@@ -16,11 +16,14 @@ end
 
 function objs.remove(i)
 	local o = objs[i]
+
+	table.remove(objs, i)
+
 	if o.physics ~= nil then 
 		o.physics.body:destroy()
+		o.physics.body:release()
 		o.physics = nil
 	end
-	table.remove(objs, i)
 end
 
 --for specific updates we want to apply globally to the objects

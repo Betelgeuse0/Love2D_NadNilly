@@ -21,23 +21,19 @@ function love.load()
   	love.graphics.setBackgroundColor(0, .4, .7, 1)	--temporary backgruond color for vibes
 	Camera:init(RAW_WINDOW_WIDTH, RAW_WINDOW_HEIGHT)
 	Camera:set(0, Camera.y + WINDOW_HEIGHT)
-	Camera.speed, Camera.maxSpeed = 1, 5
+	Camera.speed, Camera.maxSpeed = 1, 4
 
 	world = love.physics.newWorld(0, 9.81*150, true)	--OG gravity 9.81 * 64
 	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	
-	--level:addSectionFromImage("Sprites/LevelDesign/section3.png")
-	--level:addSectionFromImage("Sprites/LevelDesign/testSection2.png")
-	--level:addSectionFromImage("Sprites/LevelDesign/testSection.png")
-
 	setSeed = false
 
 	local groundBase = Platform(640, -14, DIRT, 25, DIRT_FRAMES)
 	groundBase.name = "groundBase";
 
   	--Spawn Bjornio last so he overlaps!
-  	Bean(775, -500, 100, -150)
   	BJORN = Björnio(775, -500) 
+
 end
 
 function love.update(dt)
@@ -47,9 +43,11 @@ function love.update(dt)
 
 		local sectionImageNames = 
 		{
-			"Sprites/LevelDesign/section3.png",
-			"Sprites/LevelDesign/testSection2.png",
-			"Sprites/LevelDesign/testSection.png"
+			"Sprites/LevelDesign/mapSection0.png",
+			"Sprites/LevelDesign/mapSection1.png",
+			"Sprites/LevelDesign/mapSection2.png",
+			"Sprites/LevelDesign/mapSection3.png",
+			"Sprites/LevelDesign/mapSection4.png",
 		}
 
 		sectionImageNames = tableRandomized(sectionImageNames)
@@ -64,9 +62,10 @@ function love.update(dt)
 
 	--gradually increase the camera speed
 	if (Camera.speed < Camera.maxSpeed) then 
-		Camera.speed = Camera.speed + (dt / 25)
+		Camera.speed = Camera.speed + (dt / 35)
 	end
 end
+
 
 function love.draw()
 	--background
@@ -89,3 +88,8 @@ function love.draw()
 		love.graphics.print("YOU LOSE", 10 + (BGCOLOR * 300), -Camera.y + 100 , 0.15, 1, 1)
 	end
 end
+
+--[[function love.errorhandler(msg)
+	print(msg)
+	--return errorDisplayer:send(msg)
+end]]

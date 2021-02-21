@@ -18,9 +18,13 @@ function Egg(x, y, img, frames)
 	local x6, y6 = x - 16, y + 17
 	local x7, y7 = x, y + 25
 	local x8, y8 = x + 16, y + 17
-	SetUpPhysicsPolygon(o, "dynamic", 1, false, 1, o, x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8)
-	table.insert(objs, o)
-	return o	--new instance
+	local valid = SetUpPhysicsPolygon(o, "dynamic", 1, false, 1, o, x, y, {x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8})
+	if valid then 
+		table.insert(objs, o)
+		return o	--new instance
+	end
+
+	--POSSIBLE SOLUTION: instead of not creating an object at all setup a circle collider instead
 end
 
 function EggUpdate(o, dt, i)
