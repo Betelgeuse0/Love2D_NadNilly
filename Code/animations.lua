@@ -49,6 +49,12 @@ function DrawPhysicsAnimation(o, anim, offsetx, offsety, scalex, scaley)
 	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), scalex, scaley, offsetx, offsety)
 end
 
+function DrawDirectionalAnimation(o, anim, offsetx, offsety, horizontalDirection)
+	love.graphics.setColor(1, 1, 1, 1)
+	local x, y = GetPolygonCenter(o)
+	love.graphics.draw(anim.image, anim.quads[anim.frame], x, y, o.physics.body:getAngle(), horizontalDirection, 1, offsetx, offsety)
+end
+
 function DrawBjornioAnimation(o, anim, offsetx, offsety, horizontalDirection)
 	if not o.canBeHit and (o.flashTimer * 10) < 1.5 then
 		love.graphics.setColor(1, 0.8, 0.8, 0.8)

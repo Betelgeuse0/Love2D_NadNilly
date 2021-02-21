@@ -14,6 +14,7 @@ require("Code/global")
 require("Code/callbacks")
 require("Code/projectile")
 require("Code/GUI")
+require("Code/Bean")
 
 function love.load()
 	love.window.setTitle("Björnio")
@@ -35,7 +36,8 @@ function love.load()
 	groundBase.name = "groundBase";
 
   	--Spawn Bjornio last so he overlaps!
-  	Björnio(775, -500)
+  	Bean(775, -500, 100, -150)
+  	BJORN = Björnio(775, -500) 
 end
 
 function love.update(dt)

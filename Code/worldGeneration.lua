@@ -28,6 +28,10 @@ function EggTemplate(x, y)
 	return {basey = y, x = x, y = y, preset = EGG_PRESET[math.random(#EGG_PRESET)], name = "egg"}
 end
 
+function BeanTemplate(x, y, speed, jumpForce)
+	return {basey = y, x = x, y = y, speed = speed, jumpForce = jumpForce, name = "bean"}
+end
+
 function level:update()
 	for j,t in ipairs(self.info) do
 		--check if template is below the camera and if it is then place it relative to top
@@ -56,12 +60,15 @@ function level:setRelativeToTop(t)
 end
 
 function level:genObj(t)
+	print(t.name)
 	if t.name == "platform" then 
 		Platform(t.x, t.y, t.image, t.tileAmount, t.frames)
 	elseif t.name == "owl" then 
 		Owl(t.x, t.y, t.movex, t.movey, t.speed, t.dirx, t.diry)
 	elseif t.name == "egg" then 
 		Egg((t.x / 2) + 16, t.y / 2, t.preset.image, t.preset.frames)
+	elseif t.name == "bean" then 
+		Bean(t.x, t.y, t.speed, t.jumpForce)
 	end
 
 end
@@ -95,7 +102,8 @@ local mapColors =
 	owlVer = {r = 227/255, g = 0, b = 34/255, a = 1},
 	owlDiag1 = {r = 1, g = 9/255, b = 46/255, a = 1},
 	owlDiag2 = {r = 1, g = 62/255, b = 90/255, a = 1},
-	egg = {r = 1, g = 1, b = 128/255, a = 1}
+	egg = {r = 1, g = 1, b = 128/255, a = 1},
+	bean = {r = 54/255, g = 1, b = 54/255, a = 1}
 }
 
 function colorEquals(c1, c2)
@@ -105,6 +113,10 @@ end
 function colorIsPlatform(c)
 	return colorEquals(c, mapColors.stonePlatform) or colorEquals(c, mapColors.woodPlatform)
 		or colorEquals(c, mapColors.dirtPlatform) or colorEquals(c, mapColors.grassPlatform)
+end
+
+function colorPrint(c)
+	print(c.r, c.g, c.b, c.a)
 end
 
 function level:addSectionsFromImage(sectionNames)
@@ -169,6 +181,8 @@ function level:addSectionFromImage(filename) --note make images from a 44x25 fil
 					table.insert(section, OwlTemplate(posx, posy, 400, 400, 500, 1, -1))
 				elseif colorEquals(color, mapColors.egg) then 
 					table.insert(section, EggTemplate(posx, posy))
+				elseif colorEquals(color, mapColors.bean) then 
+					table.insert(section, BeanTemplate(posx, posy, 100, -150))
 				end
 			end
 		end

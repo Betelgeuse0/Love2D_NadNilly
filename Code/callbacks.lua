@@ -38,6 +38,17 @@ function beginContact(a, b, coll)
 				bjorn.canBeHit = false
 			end
 		end
+	elseif obj.name == "bean" then 
+		local velx, vely = bjorn.physics.body:getLinearVelocity()
+		local ypos = bjorn.physics.body:getY() + 84/2
+		local oypos = obj.physics.body:getY() - 10
+
+		if vely > 0 and ypos < oypos then
+			JUMP2:play()
+			obj.dead = true
+			bjorn.physics.body:setLinearVelocity(velx, 0)
+			bjorn.physics.body:applyLinearImpulse(0, -1000)
+		end
 	end
 end
 
@@ -60,7 +71,7 @@ function bulletContact(a, b)
  		obj = userData1
  	end
 
-	if obj.name == "owl" then
+	if obj.name == "owl" or obj.name == "bean" then
 		obj.dead = true
 		bullet.hasHit = true
 	end

@@ -18,6 +18,7 @@ ACTIVEBULLETS = {}
 LOSE = false
 BGCOLOR = 1
 
+
 --IMAGES
 	--MAP
 --MAP_PALETTE = love.graphics.newImage("Sprites/mapPalette.png")
@@ -75,12 +76,18 @@ GRASS_FRAMES = {0}
 	
 --UNITS
 OWLSPRITESHEET = love.graphics.newImage("Sprites/Units/owl-SpriteSheet.png")
+BEANSPRITESHEET = love.graphics.newImage("Sprites/Units/bean-SpriteSheet.png")
 
 --Audio
 JUMP = love.audio.newSource('Audio/jump.wav', 'static')
+JUMP2 = love.audio.newSource('Audio/jump.wav', 'static')
+JUMP2:setPitch(0.7)
+JUMP2:setVolume(0.7)
+
 SHOT = love.audio.newSource('Audio/shot.mp3', 'static')
 SHOT:setVolume(0.3)
 OOO = love.audio.newSource('Audio/ooo.mp3', 'static')
 OOO:setVolume(0.7)
 OOO:setPitch(2)
+
 LOSESOUND = love.audio.newSource('Audio/lose2.wav', 'static')
